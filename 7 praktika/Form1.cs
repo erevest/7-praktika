@@ -27,7 +27,8 @@ namespace _7_praktika
       dataGridView1.RowCount = 15; //Указываем количество строк
       dataGridView1.ColumnCount = 15; //Указываем количество столбцов
       int[,] a = new int[15, 15]; //Инициализируем массив
-      int i, j;
+      int i, j,b=0;
+      int max=-101;
       //Заполняем матрицу случайными числами
       Random rand = new Random();
       for (i = 0; i < 15; i++)
@@ -39,11 +40,32 @@ namespace _7_praktika
           dataGridView1.Rows[i].Cells[j].Value =
          Convert.ToString(a[i, j]);
       //производим поиск максимального элемента на дополнительной диагонали
- int m = int.MaxValue;
+      int m = int.MinValue;
+      for (i = 0; i < 15; i++) {
+        for (j = 0; j < 15; j++) {
+          if (a[i, j] > max)
+          {
+            max = a[i, j];
+            b = i;
+          }
+        }}
       for (i = 0; i < 15; i++)
-        if (a[i, 14 - i] > m) m = a[i, 14 - i];
+      {
+        for (j = 0; j < 15; j++)
+        {
+          if  ((a[i,j]!=max)&&(b==i))
+          {
+            a[i, j] = 0;
+          }
+        }
+      }
+      for (i = 0; i < 15; i++)
+        for (j = 0; j < 15; j++)
+          dataGridView1.Rows[i].Cells[j].Value =
+         Convert.ToString(a[i, j]);
       // выводим результат
       textBox1.Text = Convert.ToString(m);
     }
   }
 }
+
